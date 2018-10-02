@@ -62,6 +62,7 @@ namespace Insta.Controllers
             {
                 Photo photo = new Photo
                 {
+                    user_id = ActiveUser.user_id,
                     image = add.image,
                     img_alt = add.img_alt,
                     description = add.description
@@ -120,6 +121,20 @@ namespace Insta.Controllers
         {
             return View();
         }
+        [HttpGet("DeleteComment/{comment_id}")]
+        public IActionResult DeleteComment(int comment_id)
+        {
+            if(ActiveUser == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            Comment comment = _iContext.comments.Where(c => c.comment_id == comment_id).SingleOrDefault();
+            List<Like> likes = _iContext.likes.Include(c => c.Comment).Where(c => c.comment_id == comment_id).ToList();
+            _iContext.likes.RemoveRange(likes);
+            _iContext.comments.Remove(comment);
+            ViewBag.user = ActiveUser;
+            return RedirectToAction("Dashboard", "Insta");
+        }
         [HttpPost("PostComment")]
         public IActionResult PostComment(CommentOnPhoto photo)
         {
@@ -140,6 +155,49 @@ namespace Insta.Controllers
                 return Redirect("/Comments/" + photo.photo_id);
             }
             return View("Comments/" + photo.photo_id);
+        }
+        [HttpPost("LikeAPhoto")]
+        public IActionResult LikeAPhoto(LikeAPhoto like)
+        {
+            if(ActiveUser == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            if(ModelState.IsValid)
+            {
+                Like newLike = new Like
+                {
+                    like_id = like.like_id,
+                    photo_id = like.photo_id,
+                    user_id = like.user_id
+                };
+                _iContext.likes.Add(newLike);
+                _iContext.SaveChanges();
+                return RedirectToAction("Dashboard", "Insta");
+            }
+            return View("Dashboard", "Insta");
+        }
+        [HttpPost("LikeAComment")]
+        public IActionResult LikeAComment(LikeAComment like)
+        {
+            if(ActiveUser == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            if(ModelState.IsValid)
+            {
+                Like newLike = new Like
+                {
+                    like_id = like.like_id,
+                    comment_id = like.comment_id,
+                    user_id = like.user_id,
+                    photo_id = like.photo_id
+                };
+                _iContext.likes.Add(newLike);
+                _iContext.SaveChanges();
+                return Redirect("/Comments/" + like.photo_id);
+            }
+            return View("/Comments/" + like.photo_id);
         }
         public IActionResult Error()
         {

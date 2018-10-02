@@ -3,7 +3,7 @@
 }
 
 <div class="row">
-    <div class="col-12 col-sm-10 col-md-10 col-lg-10 col-xl-10 offset-1">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="card p-5 mt-3 mb-3">
             <div class="card-header text-center">
                 <h1 class="card-title">@ViewData["Title"]</h1>
@@ -12,9 +12,9 @@
                         @foreach (var p in ViewBag.photos)
                         {
                             <div class="card p-3 mt-3">
-                                <img src="@p.image" alt="@p.img_alt" class="card-img-top">
+                                <img src="~/images/@p.image" alt="@p.img_alt" class="card-img-top">
                                 <div class="card-body text-center">
-                                    <p class="card-text">@p.desc</p>
+                                    <p class="card-text">@p.description</p>
                                 </div>
                                 <div class="card-footer text-center">
                                     <span><a href="" class="btn btn-info btn-round"><i class="fas fa-thumbs-up"></i> @p.Likes.Count</a></span>
