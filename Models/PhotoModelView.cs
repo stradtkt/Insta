@@ -31,6 +31,7 @@ namespace Insta.Models
         [DataType(DataType.Text)]
         [Display(Name="Comment")]
         public string comment {get;set;}
+        public int photo_id {get;set;}
     }
     public class LikeAPhoto
     {
