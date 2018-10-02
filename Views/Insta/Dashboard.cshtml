@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-12 col-sm-10 col-md-10 col-lg-10 col-xl-10 offset-1">
+        <div class="card p-5 mt-3 mb-3">
+            <div class="card-header text-center">
+                <h1 class="card-title">InstaWorld</h1>
+                <div class="card-body">
+                    @foreach (var p in ViewBag.photos)
+                    {
+                        <div class="card p-3 mt-3">
+                            <img src="@p.image" alt="@p.img_alt" class="card-img-top">
+                            <div class="card-body text-center">
+                                <p class="card-text">@p.desc</p>
+                            </div>
+                            <div class="card-footer text-center">
+                                <span><a href="" class="btn btn-info btn-round"><i class="fas fa-thumbs-up"></i> @p.Likes.Count</a></span>
+                                <span><a href="" class="btn btn-success btn-round">Comment @p.Comments.Count</a></span>
+                                @if(ViewBag.user.user_id == p.User.user_id)
+                                {
+                                    <span><a href="DeletePhoto/@p.photo_id" class="btn btn-danger btn-round">Delete</a></span>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
