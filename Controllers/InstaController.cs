@@ -72,6 +72,75 @@ namespace Insta.Controllers
             }
             return View("AddNewPhoto");
         }
+        [HttpGet("DeletePhoto/{photo_id}")]
+        public IActionResult DeletePhoto(int photo_id)
+        {
+            if(ActiveUser == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            Photo photo = _iContext.photos.Where(p => p.photo_id == photo_id).SingleOrDefault();
+            List<Like> likes = _iContext.likes.Include(p => p.Photo).Where(p => p.photo_id == photo_id).ToList();
+            List<Comment> comments = _iContext.comments.Include(p => p.Photo).Where(p => p.photo_id == photo_id).ToList();
+            _iContext.likes.RemoveRange(likes);
+            _iContext.comments.RemoveRange(comments);
+            _iContext.photos.Remove(photo);
+            _iContext.SaveChanges();
+            ViewBag.user = ActiveUser;
+            return RedirectToAction("Dashboard", "Insta");
+        }
+        [HttpGet("EditPhoto/{photo_id}")]
+        public IActionResult EditPhoto(int photo_id)
+        {
+            if(ActiveUser == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            ViewBag.success = TempData["success"];
+            ViewBag.user = ActiveUser;
+            return View();
+        }
+        [Route("{photo_id}/ProcessEditPhoto")]
+        public IActionResult ProcessEditPhoto(int photo_id, string image, string img_alt, string desc)
+        {
+            if(ActiveUser == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            Photo photo = _iContext.photos.Where(p => p.photo_id == photo_id).SingleOrDefault();
+            photo.image = image;
+            photo.img_alt = img_alt;
+            photo.desc = desc;
+            _iContext.SaveChanges();
+            TempData["success"] = "Photo successfully edited";
+            return Redirect("/EditPhoto/"+ photo_id);
+        }
+        [HttpGet("Comments/{photo_id}")]
+        public IActionResult Comments(int photo_id)
+        {
+            return View();
+        }
+        [HttpPost("PostComment")]
+        public IActionResult PostComment(CommentOnPhoto photo)
+        {
+            if(ActiveUser == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            if(ModelState.IsValid)
+            {
+                Comment comment = new Comment
+                {
+                    photo_id = photo.photo_id,
+                    comment_id = photo.comment_id,
+                    comment = photo.comment
+                };
+                _iContext.comments.Add(comment);
+                _iContext.SaveChanges();
+                return Redirect("/Comments/" + photo.photo_id);
+            }
+            return View("Comments/" + photo.photo_id);
+        }
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
