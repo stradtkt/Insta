@@ -19,7 +19,7 @@ namespace Insta.Models
         [MaxLength(1000, ErrorMessage="Description has a max length of 1000")]
         [DataType(DataType.Text)]
         [Display(Name="Description")]
-        public string desc {get;set;}
+        public string description {get;set;}
     }
     public class CommentOnPhoto : BaseEntity
     {

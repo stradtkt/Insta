@@ -11,7 +11,7 @@ namespace Insta.Models
 
         public string image {get;set;}
         public string img_alt {get;set;}
-        public string desc {get;set;}
+        public string description {get;set;}
         public int user_id {get;set;}
         public User User {get;set;}
         public List<Comment> Comments {get;set;}

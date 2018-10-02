@@ -14,6 +14,7 @@
 </div>
 <div class="row">
     <div class="col-md-6 offset-3">
+        <div class="card p-5 mb-3">
         <h1 class="text-center">@ViewData["Title"]</h1>
         <form asp-action="LoginUser" asp-controller="Home" method="POST">
             <div class="form-group">
@@ -28,8 +29,9 @@
                 </div>
                 <input asp-for="password" class="form-control" placeholder="Password">
             </div>
-            <input type="submit" value="Login" class="btn btn-success btn-round">
+            <input type="submit" value="Login" class="btn btn-success btn-round" style="margin: 0 auto; display: block; text-align: center;">
         </form>
+    </div>
     </div>
 </div>
 <div class="row">

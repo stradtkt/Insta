@@ -12,40 +12,54 @@
 </div>
 <div class="row">
     <div class="col-md-6 offset-3">
+        <div class="card p-5 mb-3">
         <h1 class="text-center">@ViewData["Title"]</h1>
         <form asp-action="RegisterUser" asp-controller="Home" method="POST">
             <div class="form-group">
                 <div class="bg-danger">
                     <span asp-validation-for="first_name"></span>
                 </div>
+                <br>
                 <input asp-for="first_name" class="form-control" placeholder="First Name">
             </div>
             <div class="form-group">
                 <div class="bg-danger">
                     <span asp-validation-for="last_name"></span>
                 </div>
+                <br>
                 <input asp-for="last_name" class="form-control" placeholder="Last Name">
             </div>
             <div class="form-group">
                 <div class="bg-danger">
                     <span asp-validation-for="email"></span>
                 </div>
+                <br>
                 <input asp-for="email" class="form-control" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <div class="bg-danger">
+                    <span asp-validation-for="phone"></span>
+                </div>
+                <br>
+                <input asp-for="phone" class="form-control" placeholder="Phone Number">
             </div>
             <div class="form-group">
                 <div class="bg-danger">
                     <span asp-validation-for="password"></span>
                 </div>
+                <br>
                 <input asp-for="password" class="form-control" placeholder="Password">
             </div>
             <div class="form-group">
                 <div class="bg-danger">
                     <span asp-validation-for="confirm"></span>
                 </div>
+                <br>
                 <input asp-for="confirm" class="form-control" placeholder="Confirm Password">
             </div>
-            <input type="submit" value="Register" class="btn btn-success btn-round">
+            <input type="submit" value="Register" class="btn btn-success btn-round" style="margin: 0 auto; display: block; text-align: center;">
         </form>
+    </div>
     </div>
 </div>
 <div class="row">

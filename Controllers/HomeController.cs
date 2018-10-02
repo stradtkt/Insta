@@ -57,6 +57,7 @@ namespace Insta.Controllers
                     first_name = newuser.first_name,
                     last_name = newuser.last_name,
                     email = newuser.email,
+                    phone = newuser.phone,
                     password = Hasher.HashPassword(newuser, newuser.password)
                   };
                 _iContext.Add(newUser);

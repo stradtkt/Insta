@@ -1,0 +1,11 @@
+E:\csharp\KevinStradtman\Insta\bin\Debug\netcoreapp2.0\Insta.deps.json
+E:\csharp\KevinStradtman\Insta\bin\Debug\netcoreapp2.0\Insta.runtimeconfig.json
+E:\csharp\KevinStradtman\Insta\bin\Debug\netcoreapp2.0\Insta.runtimeconfig.dev.json
+E:\csharp\KevinStradtman\Insta\bin\Debug\netcoreapp2.0\Insta.dll
+E:\csharp\KevinStradtman\Insta\bin\Debug\netcoreapp2.0\Insta.pdb
+E:\csharp\KevinStradtman\Insta\obj\Debug\netcoreapp2.0\Insta.csprojResolveAssemblyReference.cache
+E:\csharp\KevinStradtman\Insta\obj\Debug\netcoreapp2.0\Insta.csproj.CoreCompileInputs.cache
+E:\csharp\KevinStradtman\Insta\obj\Debug\netcoreapp2.0\Insta.AssemblyInfoInputs.cache
+E:\csharp\KevinStradtman\Insta\obj\Debug\netcoreapp2.0\Insta.AssemblyInfo.cs
+E:\csharp\KevinStradtman\Insta\obj\Debug\netcoreapp2.0\Insta.dll
+E:\csharp\KevinStradtman\Insta\obj\Debug\netcoreapp2.0\Insta.pdb

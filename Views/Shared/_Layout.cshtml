@@ -21,14 +21,16 @@
          {
             <ul class="navbar-nav">
                 <li class="nav-item">
-                <a class="nav-link" asp-action="Dashboard" asp-controller="Insta">Dashboard</a>
+                <a class="nav-link" asp-action="Dashboard" asp-controller="Insta">InstaFeed</a>
                 </li>
                 <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Menu
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" asp-action="AddPhoto" asp-controller="Insta">Add Photo</a>
+                    <a class="dropdown-item" asp-action="AddNewPhoto" asp-controller="Insta">Add Photo</a>
+                    <a class="dropdown-item" asp-action="ViewAllPhotos" asp-controller="Insta">View All Photos</a>
+                    <a class="dropdown-item" asp-action="Messages" asp-controller="Message">Messages</a>
                 </div>
                 </li>
             </ul>

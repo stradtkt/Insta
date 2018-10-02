@@ -12741,11 +12741,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "e:\\csharp\\KevinStradtman\\Insta\\Insta.csproj",
+      "projectUniqueName": "E:\\csharp\\KevinStradtman\\Insta\\Insta.csproj",
       "projectName": "Insta",
-      "projectPath": "e:\\csharp\\KevinStradtman\\Insta\\Insta.csproj",
+      "projectPath": "E:\\csharp\\KevinStradtman\\Insta\\Insta.csproj",
       "packagesPath": "C:\\Users\\strad\\.nuget\\packages\\",
-      "outputPath": "e:\\csharp\\KevinStradtman\\Insta\\obj\\",
+      "outputPath": "E:\\csharp\\KevinStradtman\\Insta\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -64,7 +64,7 @@ namespace Insta.Controllers
                 {
                     image = add.image,
                     img_alt = add.img_alt,
-                    desc = add.desc
+                    description = add.description
                 };
                 _iContext.photos.Add(photo);
                 _iContext.SaveChanges();
@@ -101,7 +101,7 @@ namespace Insta.Controllers
             return View();
         }
         [Route("{photo_id}/ProcessEditPhoto")]
-        public IActionResult ProcessEditPhoto(int photo_id, string image, string img_alt, string desc)
+        public IActionResult ProcessEditPhoto(int photo_id, string image, string img_alt, string description)
         {
             if(ActiveUser == null)
             {
@@ -110,7 +110,7 @@ namespace Insta.Controllers
             Photo photo = _iContext.photos.Where(p => p.photo_id == photo_id).SingleOrDefault();
             photo.image = image;
             photo.img_alt = img_alt;
-            photo.desc = desc;
+            photo.description = description;
             _iContext.SaveChanges();
             TempData["success"] = "Photo successfully edited";
             return Redirect("/EditPhoto/"+ photo_id);
