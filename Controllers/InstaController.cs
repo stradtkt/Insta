@@ -33,20 +33,21 @@ namespace Insta.Controllers
                 return RedirectToAction("Login", "Home");
             }
             List<Photo> photos = _iContext.photos
-                .Include(u => u.User)
-                .Include(c => c.Comments)
-                .Include(l => l.Likes)
+                .Include(p => p.User)
+                .Include(p => p.Comments)
+                .Include(p => p.Likes)
                 .ThenInclude(ul => ul.User)
                 .ToList();
             List<User> users = _iContext.users
-                .Include(l => l.Likes)
-                .ThenInclude(l => l.User)
-                .Include(c => c.Comments)
-                .Include(p => p.Photos)
+                .Include(u => u.Likes)
+                .ThenInclude(u => u.User)
+                .Include(u => u.Comments)
+                .Include(u => u.Photos)
                 .ToList();
             List<Like> likes = _iContext.likes
-                .Include(p => p.Photo)
-                .Include(u => u.User)
+                .Include(l => l.Photo)
+                .Include(l => l.User)
+                .ThenInclude(l => l.Likes)
                 .ToList();
             ViewBag.likes = likes;
             ViewBag.users = users;
@@ -132,6 +133,26 @@ namespace Insta.Controllers
         [HttpGet("Comments/{photo_id}")]
         public IActionResult Comments(int photo_id)
         {
+            if(ActiveUser == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            int? user = HttpContext.Session.GetInt32("user_id");
+            Photo photo = _iContext.photos
+                .Include(p => p.User)
+                .Include(p => p.Comments)
+                .ThenInclude(p => p.User)
+                .Where(p => p.photo_id == photo_id)
+                .SingleOrDefault();
+            List<Comment> comments = _iContext.comments
+                .Include(c => c.User)
+                .Include(c => c.Photo)
+                .Where(c => c.photo_id == photo_id)
+                .ToList();
+            ViewBag.comments = comments;
+            ViewBag.photo = photo;
+            ViewBag.user = ActiveUser;
+            ViewBag.owner = user;
             return View();
         }
         [HttpGet("DeleteComment/{comment_id}")]
@@ -146,26 +167,23 @@ namespace Insta.Controllers
             ViewBag.user = ActiveUser;
             return RedirectToAction("Dashboard", "Insta");
         }
-        [HttpPost("PostComment")]
-        public IActionResult PostComment(CommentOnPhoto photo)
+        [HttpPost("{photo_id}/PostComment")]
+        public IActionResult PostComment(int photo_id, int comment_id, string com)
         {
             if(ActiveUser == null)
             {
                 return RedirectToAction("Login", "Home");
             }
-            if(ModelState.IsValid)
+            Comment comment = new Comment
             {
-                Comment comment = new Comment
-                {
-                    photo_id = photo.photo_id,
-                    comment_id = photo.comment_id,
-                    comment = photo.comment
-                };
-                _iContext.comments.Add(comment);
-                _iContext.SaveChanges();
-                return Redirect("/Comments/" + photo.photo_id);
-            }
-            return View("Comments/" + photo.photo_id);
+                photo_id = photo_id,
+                comment_id = comment_id,
+                comment = com,
+                user_id = ActiveUser.user_id
+            };
+            _iContext.comments.Add(comment);
+            _iContext.SaveChanges();
+            return Redirect("/Comments/" + photo_id);
         }
         [Route("LikeAPhoto/{photo_id}")]
         public IActionResult LikeAPhoto(int photo_id)
@@ -195,8 +213,15 @@ namespace Insta.Controllers
             {
                 return RedirectToAction("Login", "Home");
             }
-            Photo photo = _iContext.photos.Where(p => p.photo_id == photo_id).SingleOrDefault();
-            Like like = _iContext.likes.Include(p => p.Photo).Where(p => p.photo_id == photo_id).Include(u => u.User).Where(u => u.user_id == user_id).SingleOrDefault(u => u.like_id == like_id);
+            Photo photo = _iContext.photos
+                .Where(p => p.photo_id == photo_id)
+                .SingleOrDefault();
+            Like like = _iContext.likes
+                .Include(p => p.Photo)
+                .Where(p => p.photo_id == photo_id)
+                .Include(u => u.User)
+                .Where(u => u.user_id == user_id)
+                .SingleOrDefault(u => u.like_id == like_id);
             _iContext.likes.RemoveRange(like);
             return RedirectToAction("Dashboard", "Home");
         }

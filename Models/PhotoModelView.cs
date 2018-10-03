@@ -21,16 +21,4 @@ namespace Insta.Models
         [Display(Name="Description")]
         public string description {get;set;}
     }
-    public class CommentOnPhoto : BaseEntity
-    {
-        [Key]
-        public int comment_id {get;set;}
-        [Required(ErrorMessage="Comment field is required to post something")]
-        [MinLength(3, ErrorMessage="There is a min length of 3 for the comment")]
-        [MaxLength(500, ErrorMessage="There is a max length of 500 for the comment")]
-        [DataType(DataType.Text)]
-        [Display(Name="Comment")]
-        public string comment {get;set;}
-        public int photo_id {get;set;}
-    }
 }

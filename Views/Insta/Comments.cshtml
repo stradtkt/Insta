@@ -1,0 +1,49 @@
+@{
+    ViewData["Title"] = "Comments";
+}
+
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="card p-3 mt-5 mb-5">
+            <div class="card-header">
+                <h1 class="text-center">@ViewData["Title"]</h1>
+            </div>
+            <div class="card-body">
+                <div class="card mt-3 mb-3">
+                    <img src="~/images/@ViewBag.photo.image" alt="@ViewBag.photo.img_alt" class="card-img-top">
+                    <h3 class="card-title text-center">@ViewBag.photo.User.first_name @ViewBag.photo.User.last_name</h3>
+                    <div class="card-body">
+                        <div class="card p-1 mt-3 mb-3">
+                            <div class="card-header text-center">
+                                <p class="lead">Leave A Comment</p>
+                            </div>
+                            <div class="card-body">
+                                @foreach (var c in ViewBag.comments)
+                                {
+                                    @if(ViewBag.user.user_id == ViewBag.owner)
+                                    {
+                                        <div class="bg-info">
+                                            <p class="text-right text-white">@c.comment</p>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="bg-success">
+                                            <p class="text-left text-white">@c.comment</p>
+                                        </div>
+                                    }
+                                }
+                                <form action="/@ViewBag.photo.photo_id/PostComment" method="POST">
+                                    <div class="form-group">
+                                        <textarea name="com" cols="30" rows="10" class="form-control" placeholder="Leave A Comment Here..."></textarea>
+                                    </div>
+                                    <input type="submit" value="Add Comment" class="btn btn-style btn-round" style="margin: 0 auto; display: block; text-align: center;">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
