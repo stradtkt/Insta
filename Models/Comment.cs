@@ -10,13 +10,10 @@ namespace Insta.Models
         [Key]
         public int comment_id {get;set;}
         public string comment {get;set;}
-        [ForeignKey("Photo")]
         public int photo_id {get;set;}
         public virtual Photo Photo {get;set;}
-        public List<Like> Likes {get;set;}
         public Comment()
         {
-            Likes = new List<Like>();
             created_at = DateTime.Now;
             updated_at = DateTime.Now;
         }

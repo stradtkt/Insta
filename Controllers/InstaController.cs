@@ -40,6 +40,7 @@ namespace Insta.Controllers
                 .ToList();
             List<User> users = _iContext.users
                 .Include(l => l.Likes)
+                .ThenInclude(l => l.User)
                 .Include(c => c.Comments)
                 .Include(p => p.Photos)
                 .ToList();
