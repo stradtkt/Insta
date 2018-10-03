@@ -49,3 +49,27 @@
     height: 200px;
     width: 100%;
 }
+.you-block {
+    width: 40%;
+    margin-left: auto;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.you-block .you {
+    padding: 5px;
+}
+.others-block {
+    width: 40%;
+    margin-right: auto;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.others-block .others {
+    padding: 5px;
+}

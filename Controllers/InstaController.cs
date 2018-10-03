@@ -146,7 +146,9 @@ namespace Insta.Controllers
                 .SingleOrDefault();
             List<Comment> comments = _iContext.comments
                 .Include(c => c.User)
+                .ThenInclude(c => c.Comments)
                 .Include(c => c.Photo)
+                .ThenInclude(c => c.Comments)
                 .Where(c => c.photo_id == photo_id)
                 .ToList();
             ViewBag.comments = comments;
