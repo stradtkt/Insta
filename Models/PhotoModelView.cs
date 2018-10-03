@@ -33,19 +33,4 @@ namespace Insta.Models
         public string comment {get;set;}
         public int photo_id {get;set;}
     }
-    public class LikeAPhoto
-    {
-        [Key]
-        public int like_id {get;set;}
-        public int photo_id {get;set;}
-        public int user_id {get;set;}
-    }
-    public class LikeAComment
-    {
-        [Key]
-        public int like_id {get;set;}
-        public int user_id {get;set;}
-        public int comment_id {get;set;}
-        public int photo_id {get;set;}
-    }
 }

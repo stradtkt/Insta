@@ -36,7 +36,19 @@ namespace Insta.Controllers
                 .Include(u => u.User)
                 .Include(c => c.Comments)
                 .Include(l => l.Likes)
+                .ThenInclude(ul => ul.User)
                 .ToList();
+            List<User> users = _iContext.users
+                .Include(l => l.Likes)
+                .Include(c => c.Comments)
+                .Include(p => p.Photos)
+                .ToList();
+            List<Like> likes = _iContext.likes
+                .Include(p => p.Photo)
+                .Include(u => u.User)
+                .ToList();
+            ViewBag.likes = likes;
+            ViewBag.users = users;
             ViewBag.user = ActiveUser;
             ViewBag.photos = photos;
             return View();
@@ -129,8 +141,6 @@ namespace Insta.Controllers
                 return RedirectToAction("Login", "Home");
             }
             Comment comment = _iContext.comments.Where(c => c.comment_id == comment_id).SingleOrDefault();
-            List<Like> likes = _iContext.likes.Include(c => c.Comment).Where(c => c.comment_id == comment_id).ToList();
-            _iContext.likes.RemoveRange(likes);
             _iContext.comments.Remove(comment);
             ViewBag.user = ActiveUser;
             return RedirectToAction("Dashboard", "Insta");
@@ -156,8 +166,8 @@ namespace Insta.Controllers
             }
             return View("Comments/" + photo.photo_id);
         }
-        [HttpPost("LikeAPhoto")]
-        public IActionResult LikeAPhoto(LikeAPhoto like)
+        [Route("LikeAPhoto/{photo_id}")]
+        public IActionResult LikeAPhoto(int photo_id)
         {
             if(ActiveUser == null)
             {
@@ -167,9 +177,8 @@ namespace Insta.Controllers
             {
                 Like newLike = new Like
                 {
-                    like_id = like.like_id,
-                    photo_id = like.photo_id,
-                    user_id = like.user_id
+                    photo_id = photo_id,
+                    user_id = ActiveUser.user_id
                 };
                 _iContext.likes.Add(newLike);
                 _iContext.SaveChanges();
@@ -177,27 +186,35 @@ namespace Insta.Controllers
             }
             return View("Dashboard", "Insta");
         }
-        [HttpPost("LikeAComment")]
-        public IActionResult LikeAComment(LikeAComment like)
+
+        [Route("UnlikeAPhoto/{photo_id}")]
+        public IActionResult UnlikeAPhoto(int photo_id, int user_id, int like_id)
         {
             if(ActiveUser == null)
             {
                 return RedirectToAction("Login", "Home");
             }
-            if(ModelState.IsValid)
+            Photo photo = _iContext.photos.Where(p => p.photo_id == photo_id).SingleOrDefault();
+            Like like = _iContext.likes.Include(p => p.Photo).Where(p => p.photo_id == photo_id).Include(u => u.User).Where(u => u.user_id == user_id).SingleOrDefault(u => u.like_id == like_id);
+            _iContext.likes.RemoveRange(like);
+            return RedirectToAction("Dashboard", "Home");
+        }
+        [HttpGet("ViewAllPhotos/{user_id}")]
+        public IActionResult ViewAllPhotos(int user_id)
+        {
+            if(ActiveUser == null)
             {
-                Like newLike = new Like
-                {
-                    like_id = like.like_id,
-                    comment_id = like.comment_id,
-                    user_id = like.user_id,
-                    photo_id = like.photo_id
-                };
-                _iContext.likes.Add(newLike);
-                _iContext.SaveChanges();
-                return Redirect("/Comments/" + like.photo_id);
+                return RedirectToAction("Login", "Home");
             }
-            return View("/Comments/" + like.photo_id);
+            List<Photo> photos = _iContext.photos
+                .Include(u => u.User)
+                .ThenInclude(u => u.Likes)
+                .Include(c => c.Comments)
+                .Where(u => u.user_id == user_id)
+                .ToList();
+            ViewBag.photos = photos;
+            ViewBag.user = ActiveUser;
+            return View();
         }
         public IActionResult Error()
         {

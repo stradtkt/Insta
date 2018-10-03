@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+    <div class="card p-5 mt-5 mb-5 your-photos-card-main">
+        <a asp-action="AddNewPhoto" asp-controller="Insta" class="btn-style btn btn-round btn-info" style="margin: 0 auto; text-align: center; display: block;">Add A Pic?</a>
+    @foreach (var p in ViewBag.photos)
+    {
+        <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 your-photos-card-cols">
+            <div class="card mt-3 your-photos-card">
+                <img src="~/images/@p.image" alt="@p.img_alt" class="card-img-top">
+                <div class="card-body text-center">
+                    <small>@p.created_at</small>
+                </div>
+                <div class="card-footer">
+                    <span><a href="" class="btn-style btn-round btn-info btn"><i class="fas fa-thumbs-up"></i> @p.Likes.Count</a></span>
+                    <span><a href="Comments/@p.photo_id" class="btn btn-success btn-round">Comment @p.Comments.Count</a> </span>
+                    <span><a href="EditPhoto/@p.photo_id" class="btn btn-warning btn-round">Edit</a> </span>
+                    <span><a href="DeletePhoto/@p.photo_id" class="btn btn-danger btn-round">Delete</a> </span>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+</div>
+</div>

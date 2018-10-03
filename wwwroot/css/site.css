@@ -12,3 +12,41 @@
     -ms-box-shadow: 2px 2px 5px rgba(50,50,50,0.5);
     -o-box-shadow: 2px 2px 5px rgba(50,50,50,0.5);
 }
+
+.navbar {
+    background: linear-gradient(120deg, dodgerblue, rgba(200,0,100,0.5));
+    background: -webkit-linear-gradient(120deg, dodgerblue, rgba(200,0,100,0.5));
+    background: -moz-linear-gradient(120deg, dodgerblue, rgba(200,0,100,0.5));
+    background: -o-linear-gradient(120deg, dodgerblue, rgba(200,0,100,0.5));
+}
+
+.btn-style {
+    background: linear-gradient(120deg, dodgerblue, rgba(200,0,100,0.5));
+    background: -webkit-linear-gradient(120deg, dodgerblue, rgba(200,0,100,0.5));
+    background: -moz-linear-gradient(120deg, dodgerblue, rgba(200,0,100,0.5));
+    background: -o-linear-gradient(120deg, dodgerblue, rgba(200,0,100,0.5));
+    box-shadow: 2px 2px 5px rgba(50,50,50,0.5);
+    -webkit-box-shadow: 2px 2px 5px rgba(50,50,50,0.5);
+    -moz-box-shadow: 2px 2px 5px rgba(50,50,50,0.5);
+    -ms-box-shadow: 2px 2px 5px rgba(50,50,50,0.5);
+    -o-box-shadow: 2px 2px 5px rgba(50,50,50,0.5);
+}
+
+.dashboard-img {
+    height: 300px;
+    width: 80%;
+    margin: 0 auto;
+}
+.your-photos-card-main {
+    display: inline-block;
+}
+.your-photos-card-cols {
+    display: inline-block;
+}
+.your-photos-card {
+    display: inline-block;
+}
+.your-photos-card .card-img-top {
+    height: 200px;
+    width: 100%;
+}
