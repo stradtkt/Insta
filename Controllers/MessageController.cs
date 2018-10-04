@@ -25,6 +25,13 @@ namespace Insta.Controllers
                 return _iContext.users.Where(u => u.user_id == HttpContext.Session.GetInt32("user_id")).FirstOrDefault();
             }
         }
+        private Message CurrentUser
+        {
+            get
+            {
+                return _iContext.messages.Include(to => to.To).ThenInclude(to => to.Tos).Where(to => to.to_id == HttpContext.Session.GetInt32("user_id")).FirstOrDefault();
+            }
+        }
 
         [HttpGet("Messages/{user_id}")]
         public IActionResult Messages(int user_id)

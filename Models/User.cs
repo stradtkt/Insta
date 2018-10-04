@@ -13,6 +13,12 @@ namespace Insta.Models
         public string email {get;set;}
         public string password {get;set;}
         public string phone {get;set;}
+        public string occupation {get;set;}
+        public string location {get;set;}
+        public string skills {get;set;}
+        public string recent_jobs {get;set;}
+        public string profile_img {get;set;}
+        public string background_img {get;set;}
         public List<Photo> Photos {get;set;}
         public List<Message> Tos {get;set;}
         public List<Comment> Comments {get;set;}
