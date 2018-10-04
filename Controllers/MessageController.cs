@@ -26,56 +26,68 @@ namespace Insta.Controllers
             }
         }
 
-        [HttpGet("Messages")]
-        public IActionResult Messages()
-        {
-            List<UsersMessages> messages = _iContext.user_has_messages
-                .Include(u => u.User)
-                .ThenInclude(u => u.UsersMessages)
-                .Include(m => m.Message)
-                .ThenInclude(m => m.UsersMessages)
-                .OrderBy(m => m.Message)
-                .ToList();
-            ViewBag.messages = messages;
-            return View();
-        }
-        [HttpGet("Message/{message_id}")]
-        public IActionResult Message(int message_id)
+        [HttpGet("Messages/{user_id}")]
+        public IActionResult Messages(int user_id)
         {
             if(ActiveUser == null)
             {
                 return RedirectToAction("Login", "Home");
             }
-            UsersMessages message = _iContext.user_has_messages
-                .Include(m=> m.Message)
-                .Where(m => m.message_id == message_id)
-                .Include(m => m.User)
-                .SingleOrDefault();
+            User user = _iContext.users.Where(u => u.user_id == user_id).SingleOrDefault();
+            List<Message> message_users = _iContext.messages
+                .Include(f => f.From)
+                .ThenInclude(f => f.Froms)
+                .Include(t => t.To)
+                .ThenInclude(t => t.Tos)
+                .ToList();
+            ViewBag.messages = message_users;
             ViewBag.user = ActiveUser;
+            return View();
+        }
+        [HttpGet("/{to_id}/Message/{from_id}")]
+        public IActionResult Message(int from_id, int to_id)
+        {
+            if(ActiveUser == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            Message message = _iContext.messages
+                .Include(f => f.From)
+                .Where(f => f.from_id == from_id)
+                .SingleOrDefault();
+            List<Message> users_messages = _iContext.messages
+                .Include(f => f.From)
+                .ThenInclude(f => f.Froms)
+                .Where(f => f.from_id == from_id)
+                .Include(t => t.To)
+                .ThenInclude(t => t.Tos)
+                .Where(t => t.to_id == to_id)
+                .ToList();
+            ViewBag.user = ActiveUser;
+            ViewBag.all_messages = users_messages;
             ViewBag.message = message;
             return View();
         }
-        [HttpPost("Message/{message_id}/PostMessage")]
-        public IActionResult PostMessage(int message_id, int user_id, string msg)
+        [HttpPost("/{to_id}/Message/{from_id}/ProcessMessage")]
+        public IActionResult ProcessMessage(int to_id, int from_id, string message)
         {
             if(ActiveUser == null)
             {
                 return RedirectToAction("Login", "Home");
             }
-            Message newMessage = new Message
+            if(ModelState.IsValid)
             {
-                message = msg
-            };
-            _iContext.messages.Add(newMessage);
-            UsersMessages message = new UsersMessages
-            {
-                message_id = message_id,
-                user_id = user_id
-            };
-            _iContext.user_has_messages.Add(message);
-            _iContext.SaveChanges();
-            ViewBag.user = ActiveUser;
-            return Redirect("/Message/" + message_id);
+                Message msg = new Message
+                {
+                    to_id = to_id,
+                    from_id = from_id,
+                    message = message
+                };
+                _iContext.messages.Add(msg);
+                _iContext.SaveChanges();
+                return Redirect("/" + to_id + "/Message/" + from_id + "/");
+            }
+            return Redirect("/" + to_id + "/Message/" + from_id + "/");
         }
         public IActionResult Error()
         {
