@@ -11,10 +11,10 @@
                     <small>@p.created_at</small>
                 </div>
                 <div class="card-footer">
-                    <span><a href="" class="btn-style btn-round btn-info btn"><i class="fas fa-thumbs-up"></i> @p.Likes.Count</a></span>
-                    <span><a href="Comments/@p.photo_id" class="btn btn-success btn-round">Comment @p.Comments.Count</a> </span>
-                    <span><a href="EditPhoto/@p.photo_id" class="btn btn-warning btn-round">Edit</a> </span>
-                    <span><a href="DeletePhoto/@p.photo_id" class="btn btn-danger btn-round">Delete</a> </span>
+                    <a href="" class="btn-style btn-round btn-info btn btn-block"><i class="fas fa-thumbs-up"></i> @p.Likes.Count</a>
+                    <a href="Comments/@p.photo_id" class="btn btn-success btn-round btn-block">Comment @p.Comments.Count</a>
+                    <a href="EditPhoto/@p.photo_id" class="btn btn-warning btn-round btn-block">Edit</a>
+                    <a href="DeletePhoto/@p.photo_id" class="btn btn-danger btn-round btn-block">Delete</a>
                 </div>
             </div>
         </div>

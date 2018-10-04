@@ -32,8 +32,10 @@ namespace Insta.Controllers
             {
                 return RedirectToAction("Login", "Home");
             }
+            int? user = HttpContext.Session.GetInt32("user_id");
             List<Photo> photos = _iContext.photos
                 .Include(p => p.User)
+                .ThenInclude(p => p.Likes)
                 .Include(p => p.Comments)
                 .Include(p => p.Likes)
                 .ThenInclude(ul => ul.User)
@@ -46,6 +48,7 @@ namespace Insta.Controllers
                 .ToList();
             List<Like> likes = _iContext.likes
                 .Include(l => l.Photo)
+                .ThenInclude(l => l.Likes)
                 .Include(l => l.User)
                 .ThenInclude(l => l.Likes)
                 .ToList();
@@ -53,6 +56,7 @@ namespace Insta.Controllers
             ViewBag.users = users;
             ViewBag.user = ActiveUser;
             ViewBag.photos = photos;
+            ViewBag.online = user;
             return View();
         }
         [HttpGet("AddNewPhoto")]

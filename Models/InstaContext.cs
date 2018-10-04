@@ -12,7 +12,6 @@ namespace Insta.Models
         public DbSet<Message> messages {get;set;}
         public DbSet<Like> likes {get;set;}
         public DbSet<Photo> photos {get;set;}
-        public DbSet<UsersMessages> user_has_messages {get;set;}
 
     }
 }
