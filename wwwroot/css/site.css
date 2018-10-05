@@ -73,3 +73,21 @@
 .others-block .others {
     padding: 5px;
 }
+
+.bg-danger span {
+    text-align: center;
+    color: white;
+}
+.bg-danger {
+    padding: 10px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.fas.fa-star {
+    color: gold;
+    font-size: 150%;
+    text-align: center;
+}

@@ -1,4 +1,6 @@
-
+@{
+    ViewData["Title"] = "Insta Profile";
+}
 <div class="row">
     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="card mt-5 mb-5">
@@ -10,11 +12,61 @@
             <div class="card-body text-center">
                 <p class="lead">Occupation: @ViewBag.theUser.occupation</p>
                 <p class="lead">Location: @ViewBag.theUser.location</p>
+                <div class="row">
                 <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                    <p>@ViewBag.theUser.skills</p>
+                    <p>
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            Jobs
+                        </button>
+                        </p>
+                        <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+                            @foreach (var j in ViewBag.jobs)
+                            {
+                                <hr>
+                                <div class="job-container">
+                                    <span>@j.job_title | @j.company -- @j.from_date.ToString("yyyy-MM-dd") - @j.to_date.ToString("yyyy-MM-dd")</span>
+                                    <br>  
+                                    <span><script>for(var i = 0; i < @j.job_rating; i++) {document.write('<i class="fas fa-star"></i>');}</script></span>
+                                    <hr>
+                                    <h3 class="text-center">Job Description</h3>
+                                    <p class="text-center">@j.job_description</p>
+                                    <hr>
+                                    <h3 class="text-center">Skills</h3>
+                                    <p class="text-center">@j.skills</p>
+                                </div>
+                                <hr>
+                            }
+                        </div>
+                    </div>
                 </div>
                 <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
-                    <p>@ViewBag.theUser.recent_jobs</p>
+                    <p>
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse">
+                            Jobs
+                        </button>
+                    </p>
+                        <div class="collapse" id="collapse">
+                        <div class="card card-body">
+                            @foreach (var j in ViewBag.jobs)
+                            {
+                                <hr>
+                                <div class="job-container">
+                                    <span>@j.job_title | @j.company -- @j.from_date.ToString("yyyy-MM-dd") - @j.to_date.ToString("yyyy-MM-dd")</span>
+                                    <br>  
+                                    <span><script>for(var i = 0; i < @j.job_rating; i++) {document.write('<i class="fas fa-star"></i>');}</script></span>
+                                    <hr>
+                                    <h3 class="text-center">Job Description</h3>
+                                    <p class="text-center">@j.job_description</p>
+                                    <hr>
+                                    <h3 class="text-center">Skills</h3>
+                                    <p class="text-center">@j.skills</p>
+                                </div>
+                                <hr>
+                            }
+                        </div>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
@@ -22,6 +74,7 @@
 </div>
 <div class="row">
     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-        <a href="@ViewBag.theUser.user_id/EditProfile" class="btn-style btn btn-round btn-info">Edit Your Profile</a>
+        <span><a href="@ViewBag.theUser.user_id/EditProfile" class="btn-style btn btn-round btn-info">Edit Your Profile</a></span>
+        <span><a href="@ViewBag.theUser.user_id/AddJobToProfile" class="btn-style btn btn-round btn-info">Add A Job To Your Profile</a></span>
     </div>
 </div>

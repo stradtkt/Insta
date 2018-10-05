@@ -36,6 +36,11 @@ namespace Insta.Controllers
             User user = _iContext.users
                 .Where(u => u.user_id == user_id)
                 .SingleOrDefault();
+            List<Job> jobs = _iContext.jobs
+                .Include(u => u.User)
+                .Where(u => u.user_id == user_id)
+                .ToList();
+            ViewBag.jobs = jobs;
             ViewBag.theUser = user;
             ViewBag.user = ActiveUser;
             return View();
@@ -100,7 +105,49 @@ namespace Insta.Controllers
             return Redirect("/Profile/" + user_id);
         }
 
-
+        [HttpGet("Profile/{user_id}/AddJobToProfile")]
+        public IActionResult AddJobToProfile(int user_id)
+        {
+            if(ActiveUser == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            User user = _iContext.users.Where(u => u.user_id == user_id).SingleOrDefault();
+            ViewBag.current_user = user;
+            ViewBag.user = ActiveUser;
+            return View();
+        }
+        [HttpPost("ProcessAddJob")]
+        public IActionResult ProcessAddJob(AddJob job)
+        {
+            if(ActiveUser == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            if(ModelState.IsValid)
+            {
+                if(job.to_date >= DateTime.Now)
+                {
+                    ViewBag.to_date = "Present";
+                }
+                Job newJob = new Job
+                {
+                    user_id = ActiveUser.user_id,
+                    job_title = job.job_title,
+                    job_rating = job.job_rating,
+                    job_description = job.job_description,
+                    company = job.company,
+                    from_date = job.from_date,
+                    to_date = job.to_date,
+                    skills = job.skills
+                };
+                _iContext.jobs.Add(newJob);
+                _iContext.SaveChanges();
+                ViewBag.user = ActiveUser;
+                return RedirectToAction("/Profile/"+ActiveUser.user_id);
+            }
+            return View("AddJobToProfile", "Profile");
+        }
 
         public IActionResult Error()
         {
