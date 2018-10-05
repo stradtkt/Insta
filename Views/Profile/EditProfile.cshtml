@@ -1,0 +1,68 @@
+@{
+    ViewData["Title"] = "Edit Profile";
+}
+@model Insta.Models.User
+
+
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="card p-5 mt-5 mb-5">
+            <div class="card-header">
+                <h1 class="card-title text-center">@ViewData["Title"]</h1>
+            </div>
+            <div class="card-body">
+                <div class="card p-5 mt-5 mb-5">
+                    <form action="/@ViewBag.user.user_id/ProcessEditProfile" method="POST">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="fileinput-preview thumbnail" data-profile-image="@ViewBag.theUser.profile_img" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                    <div>
+                                        <label for="profile_img">Profile Image</label>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileinput-new">Select image</span>
+                                            <span class="fileinput-exists">Change</span>
+                                            <input type="file" name="profile_img" value="@ViewBag.theUser.profile_img">
+                                        </span>
+                                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                    </div>
+                                    </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <div class="fileinput fileinput-new" data-provides="fileinput">
+                                    <div class="fileinput-preview thumbnail" data-background-image="@ViewBag.theUser.background_img" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+                                    <div>
+                                        <label for="background_img">Background Image</label>
+                                        <span class="btn btn-default btn-file">
+                                            <span class="fileinput-new">Select image</span>
+                                            <span class="fileinput-exists">Change</span>
+                                            <input type="file" name="background_img" value="@ViewBag.theUser.background_img">
+                                        </span>
+                                        <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                    </div>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" name="location" value="@ViewBag.theUser.location">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" name="occupation"value="@ViewBag.theUser.occupation">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" name="skills" value="@ViewBag.theUser.skills">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" name="recent_jobs"value="@ViewBag.theUser.recent_jobs">
+                            </div>
+                        </div>
+                        <input type="submit" value="Update Profile" class="btn btn-style btn-round btn-info">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

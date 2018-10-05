@@ -20,16 +20,14 @@ namespace Insta.Models
         public string profile_img {get;set;}
         public string background_img {get;set;}
         public List<Photo> Photos {get;set;}
-        public List<Message> Tos {get;set;}
         public List<Comment> Comments {get;set;}
         public IEnumerable<Like> Likes {get;set;}
-        public List<Message> Froms {get;set;}
+        public List<Message> Messages {get;set;}
         public User()
         {
+            Messages = new List<Message>();
             Photos = new List<Photo>();
             Comments = new List<Comment>();
-            Froms = new List<Message>();
-            Tos = new List<Message>();
             created_at = DateTime.Now;
             updated_at = DateTime.Now;
         }

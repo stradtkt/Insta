@@ -9,10 +9,10 @@ namespace Insta.Models
         [Key]
         public int message_id {get;set;}
         public string message {get;set;}
+        public int user_id {get;set;}
+        public User User {get;set;}
         public int from_id {get;set;}
-        public User From {get;set;}
         public int to_id {get;set;}
-        public User To {get;set;}
         public int is_active {get;set;}
         public int is_viewed {get;set;}
         public Message()

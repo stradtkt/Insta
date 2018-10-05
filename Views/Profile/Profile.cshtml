@@ -1,0 +1,27 @@
+
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="card mt-5 mb-5">
+            <div class="card-header">
+                <img src="~/images/@ViewBag.theUser.background_img" alt="Background Image" class="card-img-top" style="width: 100%; height: 300px; margin: 0 auto;">
+                <img src="~/images/@ViewBag.theUser.profile_img" alt="Profile Image" style="width: 250px; height: 250px; border-radius: 50%; margin: 0 auto; display: block;">
+                <h1 class="card-title text-center">@ViewBag.theUser.first_name @ViewBag.theUser.last_name</h1>
+            </div>
+            <div class="card-body text-center">
+                <p class="lead">Occupation: @ViewBag.theUser.occupation</p>
+                <p class="lead">Location: @ViewBag.theUser.location</p>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <p>@ViewBag.theUser.skills</p>
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                    <p>@ViewBag.theUser.recent_jobs</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <a href="@ViewBag.theUser.user_id/EditProfile" class="btn-style btn btn-round btn-info">Edit Your Profile</a>
+    </div>
+</div>

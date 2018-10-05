@@ -44,6 +44,11 @@ namespace Insta.Controllers
         [HttpGet("AddProfile")]
         public IActionResult AddProfile()
         {
+            if(ActiveUser == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            ViewBag.user = ActiveUser;
             return View();
         }
         [HttpPost("AddProfile/{user_id}/ProcessAddProfile")]
@@ -61,7 +66,38 @@ namespace Insta.Controllers
             user.skills = skills;
             user.recent_jobs = recent_jobs;
             _iContext.SaveChanges();
-            return Redirect("Profile" + user_id);
+            return Redirect("/Profile/" + user_id);
+        }
+
+        [HttpGet("Profile/{user_id}/EditProfile")]
+        public IActionResult EditProfile(int user_id, string profile_img, string location, string background_img, string occupation, string skills, string recent_jobs)
+        {
+            if(ActiveUser == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            User user = _iContext.users.Where(u => u.user_id == user_id).SingleOrDefault();
+            ViewBag.user = ActiveUser;
+            ViewBag.theUser = user;
+            return View();
+        }
+
+        [HttpPost("Profile/{user_id}/EditProfile/ProcessEditProfile")]
+        public IActionResult ProcessEditProfile(int user_id, string profile_img, string location, string background_img, string occupation, string skills, string recent_jobs)
+        {
+            if(ActiveUser == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            User user = _iContext.users.Where(u => u.user_id == user_id).SingleOrDefault();
+            user.profile_img = profile_img;
+            user.location = location;
+            user.background_img = background_img;
+            user.occupation = occupation;
+            user.skills = skills;
+            user.recent_jobs = recent_jobs;
+            _iContext.SaveChanges();
+            return Redirect("/Profile/" + user_id);
         }
 
 
