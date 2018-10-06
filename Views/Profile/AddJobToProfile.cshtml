@@ -6,7 +6,7 @@
     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <div class="card p-3 mt-5 mb-5">
             <h1 class="card-title text-center">Add Jobs</h1>
-            <form asp-action="ProcessAddJob" method="POST">
+            <form asp-action="ProcessAddJob" asp-controller="Profile" method="POST">
                 <div class="form-group col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 offset-2">
                     <p>
                         <button class="btn btn-info btn-style btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -36,7 +36,7 @@
                                 </div>
                                 <br>
                                 <label asp-for="job_title"></label>
-                                <input type="text" name="job_title" class="form-control">
+                                <input asp-for="job_title" class="form-control">
                             </div>
                             <div class="form-group">
                                 <div class="bg-danger">
@@ -44,7 +44,7 @@
                                 </div>
                                 <br>
                                 <label asp-for="company"></label>
-                                <input type="text" name="company" class="form-control">
+                                <input asp-for="company" class="form-control">
                             </div>
                             <div class="form-group">
                                 <div class="bg-danger">
@@ -52,7 +52,7 @@
                                 </div>
                                 <br>
                                 <label asp-for="from_date"></label>
-                                <input type="datetime-local" name="from_date" class="form-control">
+                                <input asp-for="from_date" class="form-control">
                             </div>
                             <div class="form-group">
                                 <div class="bg-danger">
@@ -60,7 +60,7 @@
                                 </div>
                                 <br>
                                 <label asp-for="to_date"></label>
-                                <input type="datetime-local" name="to_date" class="form-control">
+                                <input asp-for="to_date" class="form-control">
                             </div>
                             <div class="form-group">
                                 <div class="bg-danger">
@@ -68,7 +68,7 @@
                                 </div>
                                 <br>
                                 <label asp-for="job_description"></label>
-                                <textarea name="job_description" class="form-control" cols="30" rows="10"></textarea>
+                                <textarea asp-for="job_description" class="form-control" cols="30" rows="10"></textarea>
                             </div>
                             <div class="form-group">
                                 <div class="bg-danger">
@@ -76,7 +76,7 @@
                                 </div>
                                 <br>
                                 <label asp-for="skills"></label>
-                                <textarea name="skills" class="form-control" cols="30" rows="10"></textarea>
+                                <textarea asp-for="skills" class="form-control" cols="30" rows="10"></textarea>
                             </div>   
                         </div>
                     </div>

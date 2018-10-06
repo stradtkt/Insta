@@ -43,24 +43,21 @@
                 <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                     <p>
                         <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="false" aria-controls="collapse">
-                            Jobs
+                            Skills
                         </button>
                     </p>
                         <div class="collapse" id="collapse">
                         <div class="card card-body">
-                            @foreach (var j in ViewBag.jobs)
+                            @foreach (var s in ViewBag.skills)
                             {
                                 <hr>
                                 <div class="job-container">
-                                    <span>@j.job_title | @j.company -- @j.from_date.ToString("yyyy-MM-dd") - @j.to_date.ToString("yyyy-MM-dd")</span>
+                                    <h1 class="text-center">@s.skill_title</h1>
                                     <br>  
                                     <span><script>for(var i = 0; i < @j.job_rating; i++) {document.write('<i class="fas fa-star"></i>');}</script></span>
                                     <hr>
-                                    <h3 class="text-center">Job Description</h3>
-                                    <p class="text-center">@j.job_description</p>
-                                    <hr>
-                                    <h3 class="text-center">Skills</h3>
-                                    <p class="text-center">@j.skills</p>
+                                    <h3 class="text-center">Skill Description</h3>
+                                    <p class="text-center">@s.skill_description</p>
                                 </div>
                                 <hr>
                             }

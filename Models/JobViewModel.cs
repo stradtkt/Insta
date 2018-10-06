@@ -37,4 +37,21 @@ namespace Insta.Models
         [Display(Name="Skills")]
         public string skills {get;set;}
     }
+    public class AddSkill : BaseEntity
+    {
+        [Key]
+        public int skill_id {get;set;}
+        [Required(ErrorMessage="Skill title is required")]
+        [MinLength(2, ErrorMessage="Skill title has a min length of 2")]
+        [MaxLength(40, ErrorMessage="Skill title has a max length of 40")]
+        [Display(Name="Skill Title")]
+        public string skill_title {get;set;}
+        [Required(ErrorMessage="Skill level is required")]
+        [Display(Name="Skill Level")]
+        public int skill_level {get;set;}
+        [Required(ErrorMessage="Skill description is required")]
+        [MinLength(10, ErrorMessage="Skill description has a min length of 10")]
+        [Display(Name="Skill Description")]
+        public string skill_description {get;set;}
+    }
 }

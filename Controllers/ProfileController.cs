@@ -40,6 +40,11 @@ namespace Insta.Controllers
                 .Include(u => u.User)
                 .Where(u => u.user_id == user_id)
                 .ToList();
+            List<Skills> skills = _iContext.skills
+                .Include(u => u.User)
+                .Where(u => u.user_id == user_id)
+                .ToList();
+            ViewBag.skills = skills;
             ViewBag.jobs = jobs;
             ViewBag.theUser = user;
             ViewBag.user = ActiveUser;
@@ -147,6 +152,35 @@ namespace Insta.Controllers
                 return RedirectToAction("/Profile/"+ActiveUser.user_id);
             }
             return View("AddJobToProfile", "Profile");
+        }
+        [HttpGet("Profile/{user_id}/AddSkillsToProfile")]
+        public IActionResult AddSkillsToProfile(int user_id)
+        {
+            User user = _iContext.users.Where(u => u.user_id == user_id).SingleOrDefault();
+            ViewBag.current_user = user;
+            return View();
+        }
+        [HttpPost("ProcessAddSkill")]
+        public IActionResult ProcessAddSkill(AddSkill skill)
+        {
+            if(ActiveUser == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            if(ModelState.IsValid)
+            {
+                Skills newSkill = new Skills
+                {
+                    user_id = ActiveUser.user_id,
+                    skill_title = skill.skill_title,
+                    skill_description = skill.skill_description,
+                    skill_level = skill.skill_level
+                };
+                _iContext.skills.Add(newSkill);
+                _iContext.SaveChanges();
+                return Redirect("/Profile/"+ActiveUser.user_id);
+            }
+            return View("AddSkillsToProfile", "Profile");
         }
 
         public IActionResult Error()
