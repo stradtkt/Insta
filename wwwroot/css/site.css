@@ -76,10 +76,11 @@
 
 .bg-danger span {
     text-align: center;
+    position: relative;
+    left: 5%;
     color: white;
 }
 .bg-danger {
-    padding: 10px;
     border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -90,4 +91,21 @@
     color: gold;
     font-size: 150%;
     text-align: center;
+}
+.fa-badge-check {
+    color: dodgerblue;
+}
+
+.profile-img {
+    width: 250px; 
+    height: 250px; 
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    position: relative;
+    margin: 0 auto -10%;
+    bottom: 100px; 
+    display: block;
 }

@@ -2,16 +2,7 @@
 @{
     ViewData["Title"] = "Login";
 }
-<div class="row">
-    <div class="col-md-6 offset-3">
-        <div class="bg-danger">
-            <p class="text-center">@ViewBag.errors</p>
-        </div>
-        <div class="bg-success">
-            <p class="text-center">@ViewBag.success</p>
-        </div>
-    </div>
-</div>
+<div class="container">
 <div class="row">
     <div class="col-md-6 offset-3">
         <div class="card p-5 mb-3">
@@ -34,8 +25,11 @@
     </div>
     </div>
 </div>
+</div>
+<div class="container">
 <div class="row">
     <div class="col-md-6 offset-3">
         <p class="lead text-center">Need to register instead? <a asp-action="Register" asp-controller="Home" asp-area="" class="btn btn-round btn-info">Register</a></p>
     </div>
+</div>
 </div>

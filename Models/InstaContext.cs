@@ -9,7 +9,6 @@ namespace Insta.Models
 
         public DbSet<User> users {get;set;}
         public DbSet<Comment> comments {get;set;}
-        public DbSet<Message> messages {get;set;}
         public DbSet<Like> likes {get;set;}
         public DbSet<Photo> photos {get;set;}
         public DbSet<Job> jobs {get;set;}

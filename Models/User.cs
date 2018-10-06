@@ -22,12 +22,10 @@ namespace Insta.Models
         public List<Photo> Photos {get;set;}
         public List<Comment> Comments {get;set;}
         public IEnumerable<Like> Likes {get;set;}
-        public List<Message> Messages {get;set;}
         public List<Job> Jobs {get;set;}
         public User()
         {
             Jobs = new List<Job>();
-            Messages = new List<Message>();
             Photos = new List<Photo>();
             Comments = new List<Comment>();
             created_at = DateTime.Now;
