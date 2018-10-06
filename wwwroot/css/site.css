@@ -109,3 +109,17 @@
     bottom: 100px; 
     display: block;
 }
+.btn-group-profile {
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+}
+.btn-position {
+    margin: 0 auto; 
+    text-align: center;
+}
+.btn-form-position {
+    margin: 0 auto; 
+    display: block; 
+    text-align: center;
+}

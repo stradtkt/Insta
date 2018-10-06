@@ -34,11 +34,11 @@ namespace Insta.Controllers
             }
             int? user = HttpContext.Session.GetInt32("user_id");
             List<Photo> photos = _iContext.photos
-                .Include(p => p.User)
-                .ThenInclude(p => p.Likes)
-                .Include(p => p.Comments)
+                .Include(u => u.User)
+                .ThenInclude(u => u.Likes)
+                .Include(c => c.Comments)
                 .Include(p => p.Likes)
-                .ThenInclude(ul => ul.User)
+                .ThenInclude(p => p.User)
                 .ToList();
             List<User> users = _iContext.users
                 .Include(u => u.Likes)
@@ -46,13 +46,13 @@ namespace Insta.Controllers
                 .Include(u => u.Comments)
                 .Include(u => u.Photos)
                 .ToList();
-            List<Like> likes = _iContext.likes
-                .Include(l => l.Photo)
-                .ThenInclude(l => l.Likes)
-                .Include(l => l.User)
-                .ThenInclude(l => l.Likes)
-                .ToList();
-            ViewBag.likes = likes;
+            Like like = _iContext.likes
+                .Include(u => u.User)
+                .Include(p => p.Photo)
+                .ThenInclude(p => p.User)
+                .Where(u => u.user_id == ActiveUser.user_id)
+                .FirstOrDefault();
+            ViewBag.like = like;
             ViewBag.users = users;
             ViewBag.user = ActiveUser;
             ViewBag.photos = photos;

@@ -149,7 +149,7 @@ namespace Insta.Controllers
                 _iContext.jobs.Add(newJob);
                 _iContext.SaveChanges();
                 ViewBag.user = ActiveUser;
-                return RedirectToAction("/Profile/"+ActiveUser.user_id);
+                return Redirect("/Profile/"+ActiveUser.user_id);
             }
             return View("AddJobToProfile", "Profile");
         }

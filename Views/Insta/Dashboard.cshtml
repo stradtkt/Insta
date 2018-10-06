@@ -7,11 +7,10 @@
         <div class="card p-5 mt-3 mb-3">
             <div class="card-header text-center">
                 <h1 class="card-title">@ViewData["Title"]</h1>
-                <span><a href="ViewAllPhotos/@ViewBag.user.user_id" class="btn-style btn btn-round btn-info" style="margin: 0 auto; text-align: center;">View Your Photos</a></span>
-                <span><a href="Profile/@ViewBag.user.user_id" class="btn-style btn btn-round btn-info" style="margin: 0 auto; text-align: center;">Profile</a></span>
-                <span><a href="Messages/@ViewBag.user.user_id" class="btn-style btn btn-round btn-info" style="margin: 0 auto; text-align: center;">Messages</a></span>
+                <span><a asp-action="AddNewPhoto" asp-controller="Insta" class="btn-style btn btn-round btn-info btn-position"><i class="fal fa-image"></i> Add A Pic?</a></span>
+                <span><a href="ViewAllPhotos/@ViewBag.user.user_id" class="btn-style btn btn-round btn-info btn-position"><i class="fal fa-eye"></i> View Your Photos</a></span>
+                <span><a href="Profile/@ViewBag.user.user_id" class="btn-style btn btn-round btn-info btn-position"><i class="far fa-file-user"></i> Profile</a></span>
                 <div class="card-body">
-                    <a asp-action="AddNewPhoto" asp-controller="Insta" class="btn-style btn btn-lg btn-block btn-round btn-info">Add A Pic?</a>
                         @foreach (var p in ViewBag.photos)
                         {
                             <div class="card p-3 mt-3">
