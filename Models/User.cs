@@ -23,8 +23,10 @@ namespace Insta.Models
         public List<Comment> Comments {get;set;}
         public IEnumerable<Like> Likes {get;set;}
         public List<Job> Jobs {get;set;}
+        public List<Friends> Friends {get;set;}
         public User()
         {
+            Friends = new List<Friends>();
             Jobs = new List<Job>();
             Photos = new List<Photo>();
             Comments = new List<Comment>();

@@ -8,6 +8,8 @@ namespace Insta.Models
     {
         [Key]
         public int friend_id {get;set;}
+        public int user_id {get;set;}
+        public User Request {get;set;}
         public Byte is_friend {get;set;}
         public Byte requested {get;set;}
         public Byte accepted_request {get;set;}
