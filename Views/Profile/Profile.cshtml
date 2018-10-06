@@ -14,6 +14,18 @@
                 <p class="lead">Occupation: @ViewBag.theUser.occupation</p>
                 <p class="lead">Location: @ViewBag.theUser.location</p>
                 <div class="row">
+                    <div class="col-12 col-sm-10 col-md-10 col-lg-10 col-xl-10 offset-1 mt-5 mb-5">
+                        <div class="card p-5 gallery-card">
+                            <div id="gallery">
+                                @foreach (var p in ViewBag.photos)
+                                {
+                                    <img alt="@p.img_alt" src="~/images/@p.image" data-description="@p.description">   
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                 <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
                     <p>
                         <button class="btn btn-style" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">

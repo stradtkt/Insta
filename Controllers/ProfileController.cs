@@ -33,6 +33,10 @@ namespace Insta.Controllers
             {
                 return RedirectToAction("Login", "Home");
             }
+            List<Photo> photos = _iContext.photos
+                .Include(u => u.User)
+                .Where(u => u.user_id == user_id)
+                .ToList();
             User user = _iContext.users
                 .Where(u => u.user_id == user_id)
                 .SingleOrDefault();
@@ -44,6 +48,7 @@ namespace Insta.Controllers
                 .Include(u => u.User)
                 .Where(u => u.user_id == user_id)
                 .ToList();
+            ViewBag.photos = photos;
             ViewBag.skills = skills;
             ViewBag.jobs = jobs;
             ViewBag.theUser = user;

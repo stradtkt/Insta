@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background: #eeeeee;
 }
 
 .card form input,
@@ -106,7 +107,7 @@
     -o-border-radius: 50%;
     position: relative;
     margin: 0 auto -10%;
-    bottom: 100px; 
+    bottom: 140px; 
     display: block;
 }
 .btn-group-profile {
@@ -122,4 +123,7 @@
     margin: 0 auto; 
     display: block; 
     text-align: center;
+}
+.gallery-card {
+    background: #eeeeee;
 }
