@@ -1,0 +1,33 @@
+@{
+    ViewData["Title"] = "Users";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+            <div class="card p-3 mt-5 mb-5">
+                <div class="row">
+                    @foreach (var u in ViewBag.users)
+                    {
+                    <div class="col-3 col-sm-3 col-lg-3 col-xl-3">
+                        <div class="card mt-3">
+                            <img src="~/images/@u.profile_img" alt="@u.first_name" class="card-img-top">
+                            <h4 class="card-title text-center">@u.first_name @u.last_name</h4>
+                            <div class="card-body text-center">
+                                <p class="card-text">@u.location</p>
+                            </div>
+                            <div class="card-footer">
+                                <span><a href="RequestUser/@u.user_id" class="btn btn-style btn-round ml-4"><i class="fal fa-plus-circle"></i>  Add</a></span>
+                                <span><a href="ViewUserProfile/@u.user_id" class="btn btn-style btn-round ml-4"><i class="fal fa-user-circle"></i>  View Profile</a></span>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+            
+        </div>
+    </div>
+</div>

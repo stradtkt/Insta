@@ -1,0 +1,39 @@
+@{
+    ViewData["Title"] = "Requests";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+            <div class="card p-3 mt-5 mb-5">
+                <div class="row">
+                    @foreach (var u in ViewBag.users)
+                    {
+                        <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                            <div class="card mt-3 ml-1 mr-1 mb-3">
+                                <img src="~/images/@u.profile_img" alt="@u.first_name" class="card-img top">
+                                <h3 class="card-title text-center">@u.first_name @u.last_name</h3>
+                                <div class="card-body text-center">
+                                    <p class="card-text lead">@u.location</p>
+                                </div>
+                                <div class="card-footer p-3">
+                                    <span><a href="" class="btn btn-round btn-style btn-info">Accept</a></span>
+                                    <span><a href="" class="btn btn-round btn-style btn-info">Reject</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+            <div class="card p-1 mt-5 mb-5">
+                <h3 class="card-title text-center">Your Friends</h3>
+                @foreach (var f in ViewBag.friends)
+                {
+                    
+                }
+            </div>
+        </div>
+    </div>
+</div>

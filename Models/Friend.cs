@@ -8,15 +8,14 @@ namespace Insta.Models
     {
         [Key]
         public int friend_id {get;set;}
-        public int user_id {get;set;}
-        public User Request {get;set;}
+        public int user_one_id {get;set;}
+        public int user_two_id {get;set;}
+        public int active_user_id {get;set;}
         public Byte is_friend {get;set;}
         public Byte requested {get;set;}
         public Byte accepted_request {get;set;}
-        public List<Friends> Friends {get;set;}
         public Friend()
         {
-            Friends = new List<Friends>();
             created_at = DateTime.Now;
             updated_at = DateTime.Now;
         }

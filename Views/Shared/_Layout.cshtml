@@ -14,7 +14,6 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg fixed-top bg-info">
-  <div class="container">
     <a class="navbar-brand">Insta</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -24,7 +23,10 @@
          {
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                <a class="nav-link" asp-action="Dashboard" asp-controller="Insta">InstaFeed</a>
+                    <a class="nav-link" asp-action="Dashboard" asp-controller="Insta">InstaFeed</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-action="Users" asp-controller="Friend">Users</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
@@ -45,10 +47,9 @@
              </ul>
          }
     </div>
-  </div>
 </nav>
         @RenderBody()
-        <footer class="sticky-bottom mt-5">
+        <footer class=" mt-5">
             <div class="container">
                 <div class="row">
                     <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
