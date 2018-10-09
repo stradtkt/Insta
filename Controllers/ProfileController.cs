@@ -187,6 +187,79 @@ namespace Insta.Controllers
             }
             return View("AddSkillsToProfile", "Profile");
         }
+        [HttpGet("Profile/{user_id}/DeleteSkill/{skill_id}")]
+        public IActionResult DeleteSkill(int skill_id, int user_id)
+        {
+            if(ActiveUser == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            Skills skill = _iContext.skills.Where(s => s.skill_id == skill_id).SingleOrDefault();
+            _iContext.skills.Remove(skill);
+            _iContext.SaveChanges();
+            return Redirect("/Profile/"+user_id);
+        }
+        [HttpGet("Profile/{user_id}/DeleteJob/{job_id}")]
+        public IActionResult DeleteJob(int job_id, int user_id)
+        {
+            if(ActiveUser == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            Job job = _iContext.jobs.Where(j => j.job_id == job_id).SingleOrDefault();
+            _iContext.jobs.Remove(job);
+            _iContext.SaveChanges();
+            return Redirect("/Profile/"+user_id);
+        }
+        [HttpGet("Profile/{user_id}/EditJob/{job_id}")]
+        public IActionResult EditJob(int job_id, int user_id)
+        {
+            if(ActiveUser == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            Job job =_iContext.jobs
+                .Include(u => u.User)
+                .Where(j => j.job_id == job_id)
+                .Where(j => j.user_id == user_id)
+                .SingleOrDefault();
+            ViewBag.EditJob = job;
+            ViewBag.user = ActiveUser;
+            return View();
+        }
+        [HttpGet("Profile/{user_id}/EditSkill/{skill_id}")]
+        public IActionResult EditSkill(int skill_id, int user_id)
+        {
+            if(ActiveUser == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            Skills skill =_iContext.skills
+                .Include(u => u.User)
+                .Where(s => s.skill_id == skill_id)
+                .Where(s => s.user_id == user_id)
+                .SingleOrDefault();
+            ViewBag.EditSkill = skill;
+            ViewBag.user = ActiveUser;
+            return View();
+        }
+        [HttpPost("Profile/{user_id}/EditSkill/{skill_id}/ProcessEditSkill")]
+        public IActionResult ProcessEditSkill(int skill_id, int user_id, string skill_title, string skill_description, int skill_level)
+        {
+            if(ActiveUser == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            Skills skill = _iContext.skills
+                .Include(s => s.User)
+                .Where(s => s.skill_id == skill_id)
+                .SingleOrDefault(s => s.user_id == user_id);
+            skill.skill_title = skill_title;
+            skill.skill_description = skill_description;
+            skill.skill_level = skill_level;
+            _iContext.SaveChanges();
+            return Redirect("/Profile/"+user_id);
+        }
 
         public IActionResult Error()
         {

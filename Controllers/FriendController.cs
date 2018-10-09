@@ -35,14 +35,15 @@ namespace Insta.Controllers
             }
             List<User> users = _iContext.users
                 .OrderBy(u => u.first_name)
+                .Where(u => u.user_id != ActiveUser.user_id)
                 .ToList();
             ViewBag.users = users;
             ViewBag.user = ActiveUser;
             return View();
         }
 
-        [HttpGet("Users/RequestUser/{user_id}")]
-        public IActionResult RequestUser(int user_id)
+        [HttpGet("Users/RequestUser/{friend_id}")]
+        public IActionResult RequestUser(RequestFriend req)
         {
             if(ActiveUser == null)
             {
@@ -50,10 +51,11 @@ namespace Insta.Controllers
             }
             Friend request = new Friend
             {
-                friend_id = user_id,
-                is_friend = 0,
-                requested = 1,
-                accepted_request = 0
+                friend_id = req.friend_id,
+                is_friend = req.is_friend,
+                requested = req.requested,
+                accepted_request = req.accepted_request,
+                user_id = ActiveUser.user_id
             };
             _iContext.friends.Add(request);
             _iContext.SaveChanges();
@@ -71,6 +73,7 @@ namespace Insta.Controllers
                 .Where(f => f.accepted_request == 0 && f.is_friend == 0)
                 .ToList();
             List<Friend> friends = _iContext.friends
+                .Include(f => f.Friends)
                 .Where(f => f.accepted_request == 1 && f.is_friend == 1)
                 .ToList();
             ViewBag.friends = friends;
@@ -78,8 +81,8 @@ namespace Insta.Controllers
             ViewBag.user = ActiveUser;
             return View();
         }
-        [HttpGet("Users/Requests/AcceptRequest/{user_id}")]
-        public IActionResult AcceptRequest(int user_id)
+        [HttpGet("Users/Requests/AcceptRequest/{friend_id}")]
+        public IActionResult AcceptRequest(AcceptRequest req)
         {
             if(ActiveUser == null)
             {
@@ -87,10 +90,11 @@ namespace Insta.Controllers
             }
             Friend requested = new Friend
             {
-                friend_id = user_id,
-                is_friend = 1,
-                requested = 1,
-                accepted_request = 1
+                friend_id = req.friend_id,
+                is_friend = req.is_friend,
+                requested = req.requested,
+                accepted_request = req.accepted_request,
+                user_id = ActiveUser.user_id
             };
             _iContext.friends.Add(requested);
             _iContext.SaveChanges();
@@ -116,6 +120,15 @@ namespace Insta.Controllers
             _iContext.SaveChanges();
             ViewBag.user = ActiveUser;
             return RedirectToAction("Requests", "Friend");
+        }
+        [HttpGet("Users/Friends")]
+        public IActionResult Friends()
+        {
+            List<Friend> friends = _iContext.friends
+                .Include(f => f.Friends)
+                .ToList();
+            ViewBag.friends = friends;
+            return View();
         }
 
         public IActionResult Error()
