@@ -194,7 +194,7 @@ namespace Insta.Controllers
             {
                 return RedirectToAction("Login", "Home");
             }
-            Skills skill = _iContext.skills.Where(s => s.skill_id == skill_id).SingleOrDefault();
+            Skills skill = _iContext.skills.Where(s => s.skill_id == skill_id).SingleOrDefault(s => s.user_id == user_id);
             _iContext.skills.Remove(skill);
             _iContext.SaveChanges();
             return Redirect("/Profile/"+user_id);
@@ -206,7 +206,7 @@ namespace Insta.Controllers
             {
                 return RedirectToAction("Login", "Home");
             }
-            Job job = _iContext.jobs.Where(j => j.job_id == job_id).SingleOrDefault();
+            Job job = _iContext.jobs.Where(j => j.job_id == job_id).SingleOrDefault(j => j.user_id == user_id);
             _iContext.jobs.Remove(job);
             _iContext.SaveChanges();
             return Redirect("/Profile/"+user_id);
@@ -259,6 +259,18 @@ namespace Insta.Controllers
             skill.skill_level = skill_level;
             _iContext.SaveChanges();
             return Redirect("/Profile/"+user_id);
+        }
+        [HttpPost("Profile/{user_id}/EditJob/{job_id}/ProcessEditJob")]
+        public IActionResult ProcessEditJob(int user_id, int job_id, int job_rating, string job_title, string job_description, DateTime from_date, DateTime to_date)
+        {
+            Job job = _iContext.jobs.Include(u => u.User).Where(j => j.job_id == job_id).SingleOrDefault(j => j.user_id == user_id);
+            job.job_rating = job_rating;
+            job.job_title = job_title;
+            job.job_description = job_description;
+            job.from_date = from_date;
+            job.to_date = to_date;
+            _iContext.SaveChanges();
+            return Redirect("/Profile/" + user_id);
         }
 
         public IActionResult Error()

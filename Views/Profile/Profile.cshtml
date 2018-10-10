@@ -49,6 +49,9 @@
                                     <p class="text-center">@j.skills</p>
                                 </div>
                                 <hr>
+                                <span><a href="/Profile/@ViewBag.user.user_id/DeleteJob/@j.job_id" class="btn btn-danger btn-round m-auto">Delete</a></span>
+                                <span><a href="/Profile/@ViewBag.user.user_id/EditJob/@j.job_id" class="btn btn-warning btn-round m-auto">Edit</a></span>
+                                <hr>
                             }
                         </div>
                     </div>
@@ -72,6 +75,9 @@
                                     <h3 class="text-center">Skill Description</h3>
                                     <p class="text-center">@s.skill_description</p>
                                 </div>
+                                <hr>
+                                <span><a href="/Profile/@ViewBag.user.user_id/DeleteSkill/@s.skill_id" class="btn btn-danger btn-round m-auto">Delete</a></span>
+                                <span><a href="/Profile/@ViewBag.user.user_id/EditSkill/@s.skill_id" class="btn btn-warning btn-round m-auto">Edit</a></span>
                                 <hr>
                             }
                         </div>

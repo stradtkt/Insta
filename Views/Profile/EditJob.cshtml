@@ -1,0 +1,61 @@
+@{
+    ViewData["Title"] = "Edit Job";
+}
+<div class="container">
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="card p-3 mt-5 mb-5">
+            <h1 class="card-title text-center">Edit Jobs</h1>
+            <form action="/@ViewBag.EditJob.job_id/ProcessEditJob" method="POST">
+                <div class="form-group col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8 offset-2">
+                    <p>
+                        <button class="btn btn-info btn-style btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            Edit Job
+                        </button>
+                    </p>
+                        <div class="collapse" id="collapseExample">
+                        <div class="card card-body p-5 mt-3 mb-3">
+                            <div class="form-group">
+                                <label for="rating">Rating</label>
+                                <select name="job_rating" class="form-control">
+                                    <option value="">Rating</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="job_title">Job Title</label>
+                                <input name="job_title" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="company">Company</label>
+                                <input name="company" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="from_date">From Date</label>
+                                <input name="from_date" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="to_date">To Date</label>
+                                <input name="to_date" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="job_description">Job Description</label>
+                                <textarea name="job_description" class="form-control" cols="30" rows="10"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="skills">Skills</label>
+                                <textarea name="skills" class="form-control" cols="30" rows="10"></textarea>
+                            </div>   
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" value="Add Jobs" class="btn btn-style btn-info btn-round btn-form-position">
+            </form>
+        </div>
+    </div>
+</div>
+</div>
