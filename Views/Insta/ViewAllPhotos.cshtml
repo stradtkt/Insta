@@ -3,6 +3,16 @@
     <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
     <div class="card p-5 mt-5 mb-5 your-photos-card-main">
         <a asp-action="AddNewPhoto" asp-controller="Insta" class="btn-style btn btn-round btn-info btn-form-position">Add A Pic?</a>
+        <div class="col-12 col-sm-10 col-md-10 col-lg-10 col-xl-10 offset-1 mt-5 mb-5">
+            <div class="card p-5 gallery-card">
+                <div id="gallery">
+                    @foreach (var p in ViewBag.photos)
+                    {
+                        <img alt="@p.img_alt" src="~/images/@p.image" data-description="@p.description">   
+                    }
+                </div>
+            </div>
+        </div>
     @foreach (var p in ViewBag.photos)
     {
         <div class="col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4 your-photos-card-cols">

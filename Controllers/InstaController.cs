@@ -248,6 +248,26 @@ namespace Insta.Controllers
             ViewBag.user = ActiveUser;
             return View();
         }
+        [HttpGet("ViewAllPhotos/{user_id}/DeletePhotoOnView/{photo_id}")]
+        public IActionResult DeletePhotoOnView(int user_id, int photo_id)
+        {
+            if(ActiveUser == null) 
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            Photo delete = _iContext.photos
+                .Include(u => u.User)
+                .Where(p => p.photo_id == photo_id)
+                .SingleOrDefault(p => p.user_id == user_id);
+            List<Like> photo_likes = _iContext.likes
+                .Include(p => p.Photo)
+                .Where(p => p.photo_id == photo_id)
+                .ToList();
+            _iContext.likes.RemoveRange(photo_likes);
+            _iContext.photos.Remove(delete);
+            _iContext.SaveChanges();
+            return Redirect("/ViewAllPhotos/"+user_id);
+        }
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

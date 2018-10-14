@@ -14,6 +14,8 @@ namespace Insta.Models
         public DbSet<Job> jobs {get;set;}
         public DbSet<Skills> skills {get;set;}
         public DbSet<Friend> friends {get;set;}
-
+        public DbSet<JobCategory> job_categories {get;set;}
+        public DbSet<Jobs> jobs_list {get;set;}
+        public DbSet<JobsHasCategories> jobs_has_categories {get;set;}
     }
 }

@@ -263,6 +263,10 @@ namespace Insta.Controllers
         [HttpPost("Profile/{user_id}/EditJob/{job_id}/ProcessEditJob")]
         public IActionResult ProcessEditJob(int user_id, int job_id, int job_rating, string job_title, string job_description, DateTime from_date, DateTime to_date)
         {
+            if(ActiveUser == null) 
+            {
+                return RedirectToAction("Login", "Home");
+            }
             Job job = _iContext.jobs.Include(u => u.User).Where(j => j.job_id == job_id).SingleOrDefault(j => j.user_id == user_id);
             job.job_rating = job_rating;
             job.job_title = job_title;
