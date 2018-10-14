@@ -35,7 +35,50 @@ namespace Insta.Controllers
             }
             List<JobCategory> jobCategories = _iContext.job_categories.ToList();
             ViewBag.categories = jobCategories;
+            ViewBag.user = ActiveUser;
             return View();
+        }
+        [HttpGet("AddCategoryToJob/{list_id}")]
+        public IActionResult AddCategoryToJob(int list_id) 
+        {
+            if(ActiveUser == null) 
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            Jobs single = _iContext.jobs_list.SingleOrDefault(j => j.list_id == list_id);
+            List<JobCategory> jobCategories = _iContext.job_categories.ToList();
+            ViewBag.categories = jobCategories;
+            ViewBag.job = single;
+            ViewBag.user = ActiveUser;
+            return View();
+        }
+        [HttpGet("AddJobToCategory/{category_id}")]
+        public IActionResult AddJobToCategory(int category_id) 
+        {
+            if(ActiveUser == null) 
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            JobCategory category = _iContext.job_categories.SingleOrDefault(c => c.category_id == category_id);
+            List<Jobs> jobs = _iContext.jobs_list.ToList();
+            ViewBag.jobs = jobs;
+            ViewBag.category = category;
+            ViewBag.user = ActiveUser;
+            return View();
+        }
+        [HttpPost("AddJobToCategory/{category_id}/Job/{list_id}")]
+        public IActionResult JobToCategory(int list_id, int category_id)
+        {
+            if(ActiveUser == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            JobsHasCategories newCategory = new JobsHasCategories
+            {
+                list_id = list_id,
+                category_id = category_id
+            };
+            return Redirect("/AddJobToCategory/" + category_id);
         }
     }
 }
